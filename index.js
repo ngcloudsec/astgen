@@ -421,6 +421,41 @@ export const createDockerAst = (options) => {
 };
 
 /**
+ * Convert a single hcl terraform file to ast
+ */
+export const toHclAst = (file) => {
+  let astString = "{}";
+  try {
+    astString = execFileSync("hcl2json", [file], {
+      encoding: "utf-8",
+    });
+  } catch (err) {
+    console.log("Check if hcl2json is installed and available in PATH");
+    console.error(err);
+  }
+  return {
+    type: "file",
+    errors: [],
+    program: { type: "hcl", sourceType: "hcl", body: JSON.parse(astString) },
+  };
+};
+
+/**
+ * Generate AST for hcl terraform script
+ */
+export const createHclAst = (options) => {
+  const tffiles = getAllFiles(options.src, ".tf");
+  for (const file of tffiles) {
+    try {
+      const ast = toHclAst(file);
+      writeAstFile(file, ast, options);
+    } catch (err) {
+      console.error(file, err.message);
+    }
+  }
+};
+
+/**
  * Convert a single bash file to ast
  */
 export const toBashAst = (file, content) => {
@@ -521,6 +556,10 @@ export const start = async (options) => {
     case "bash":
     case "sh":
       return createBashAst(options);
+    case "terraform":
+    case "tf":
+    case "hcl":
+      return createHclAst(options);
     default:
       return await createXAst(options);
   }

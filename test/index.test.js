@@ -61,3 +61,8 @@ test("Test html and svg ast generation", () => {
   ast = astGenerator.toHtmlAst("./test/sample.svg");
   expect(ast);
 });
+
+test("Test hcl ast generation", () => {
+  const ast = astGenerator.toHclAst("./test/ec2.tf", null);
+  expect(ast);
+});

@@ -19,6 +19,7 @@ This script creates Abstract Syntax Tree (AST) of all the files for supported la
 | xml        | xast-util-from-xml          |
 | html       | hast-util-to-xast           |
 | svg        | hast-util-to-xast           |
+| terraform  | hcl2json                    |
 
 ## Usage
 
@@ -27,6 +28,8 @@ This script creates Abstract Syntax Tree (AST) of all the files for supported la
 ```bash
 sudo npm install -g @joernio/astgen
 ```
+
+Manually install shfmt and hcl2json by following the instructions.
 
 ## Getting Help
 
