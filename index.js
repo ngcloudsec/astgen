@@ -1,4 +1,7 @@
 import babelParser from "@babel/parser";
+import babelTraverse from "@babel/traverse";
+import * as babelTypes from "@babel/types";
+
 import { DockerfileParser } from "dockerfile-ast";
 import { execFileSync } from "child_process";
 import vueCompiler from "vue-template-compiler";
@@ -60,11 +63,13 @@ const getAllFiles = (dir, extn, files, result, regex) => {
 };
 
 const babelParserOptions = {
-  sourceType: "module",
+  sourceType: "unambiguous",
   allowImportExportEverywhere: true,
   allowAwaitOutsideFunction: true,
   allowReturnOutsideFunction: true,
   errorRecovery: true,
+  allowUndeclaredExports: true,
+  attachComment: true,
   plugins: [
     "optionalChaining",
     "classProperties",

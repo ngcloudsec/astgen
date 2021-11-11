@@ -16,6 +16,8 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@babel/parser": "^7.16.0",
+    "@babel/traverse": "^7.16.0",
+    "@babel/types": "^7.16.0",
     "dockerfile-ast": "^0.3.4",
     "hast-util-to-xast": "^2.0.0",
     "mdast-util-from-markdown": "^1.0.4",
@@ -38,7 +40,8 @@
   "files": [
     "*.js",
     "bin/",
-    "scripts/"
+    "scripts/",
+    "cpgproto/"
   ],
   "devDependencies": {
     "cross-env": "^7.0.3",
